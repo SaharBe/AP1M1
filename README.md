@@ -17,4 +17,4 @@ Here are the steps:
   
 3. Plant the file 'generic_small.xml' in flightgeer/Protocol
 4. start the program with fly.txt
-5. Opem the flight-geer and click Fly.
+5. Open the flight-geer and click Fly.
