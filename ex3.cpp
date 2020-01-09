@@ -185,7 +185,7 @@ int VarDefineCommand::execute(std::vector<string>::iterator iterator) {
             if(varMap[varKey].senderOrListener == 0) {
                 string toVectorString = varMap[varKey].sim + " " + to_string(varMap[varKey].value)+ "\r\n";
                 outputVector.push_back(toVectorString);
-                cout << toVectorString << endl;
+
             }
             return index + 1;
 
@@ -203,12 +203,11 @@ int VarDefineCommand::execute(std::vector<string>::iterator iterator) {
             var_types.senderOrListener =1;
             iterator+=3;
             index+=4;
-         //   varTypes *currentVarType = new varTypes();
-           // currentVarType->sim = *iterator;
+
             var_types.sim = *iterator;
             varMap.emplace(varKey,var_types);
         }
-        //  iterator++;
+
 
     }
     else {
@@ -324,9 +323,9 @@ int LoopCommand ::execute(std::vector<string>::iterator iterator) {
                 }
             }else if ((*(iterator + 1) == "=" && expression == "")) {
                 tempVar = *iterator;
-                //-------
+
                 iterator += 2;
-            //    index += 2;
+
                 if (flag == 0) {
                     counter+=2;
                 }
@@ -340,7 +339,7 @@ int LoopCommand ::execute(std::vector<string>::iterator iterator) {
                     index++;
                 }
                 iterator++;
-               // index++;
+
                 if (flag == 0) {
                     counter++;
                 }
@@ -375,13 +374,11 @@ int LoopCommand ::execute(std::vector<string>::iterator iterator) {
             }
             else {
                     c = commandMap.at(*iterator);
-                 //   if(*iterator == "Sleep"){
-                 //       varMap["alt"].value = 1200;
-                 //   }
+
 
                     returnValCommand = c->execute(iterator);
                     iterator +=returnValCommand;
-                    // vector.push_back(*iterator);
+
                     if (flag == 0) {
                         counter += returnValCommand;
                         //counter is on }....
@@ -393,8 +390,7 @@ int LoopCommand ::execute(std::vector<string>::iterator iterator) {
 
 
             }
-            ////////////////////////////change !!!
-             //    varMap["rpm"].value = 1200;
+
         flag = 1;
         iterator -= (counter-indexOfConditiLine);
 
@@ -447,40 +443,31 @@ int IfCommand ::execute(std::vector<string>::iterator iterator) {
 
     std::vector<string>::iterator savedIterator = iterator;
 
-   // int flag = 0;
+
     if (operSwitch(operIterator)) {
         iterator = savedIterator;
         while (*iterator != "}") {
             if(*iterator  == "\t"){
                 iterator++;
-           /*     if (flag == 0) {
 
-                }*/
                 counter++;
             }else if ((*(iterator + 1) == "=" && expression == "")) {
                 tempVar = *iterator;
                 //-------
                 iterator += 2;
-                //    index += 2;
-               /* if (flag == 0) {
 
-                }*/
                 counter+=2;
                 while (*iterator != "\t" && *iterator != "\n") {
-                   /* if (flag == 0) {
 
-                    }*/
                     counter++;
                     expression = "" + expression + *iterator;
                     iterator++;
                     index++;
                 }
                 iterator++;
-                // index++;
-                counter++;
-                /*if (flag == 0) {
 
-                }*/
+                counter++;
+
 
                 if (index > 1) {
                     Interpreter *i ;
@@ -512,16 +499,10 @@ int IfCommand ::execute(std::vector<string>::iterator iterator) {
             }
             else {
                 c = commandMap.at(*iterator);
-              /*  if(*iterator == "Sleep"){
-                    varMap["alt"].value = 1200;
-                }*/
 
                 returnValCommand = c->execute(iterator);
                 iterator +=returnValCommand;
-                // vector.push_back(*iterator);
-                /*if (flag == 0) {
 
-                }*/
                 counter += returnValCommand;
                 //counter is on }....
                 counter+=2;
@@ -531,10 +512,7 @@ int IfCommand ::execute(std::vector<string>::iterator iterator) {
 
 
         }
-        ////////////////////////////change !!!
-       // varMap["rpm"].value = 1200;
-        /////
-      //  flag = 1;
+
         iterator -= (counter-indexOfConditiLine);
     }
 
@@ -584,7 +562,7 @@ int CommendUpdateVar::execute(std::vector<string>::iterator iterator) {
     if(varMap[var].senderOrListener == 0) {
         string toVectorString = "" + varMap[var].sim + " " + to_string(varMap[var].value) +" \r\n";
         outputVector.push_back(toVectorString);
-        cout << toVectorString << endl;
+      //  cout << toVectorString << endl;
     }
     return index;
 

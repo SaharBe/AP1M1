@@ -38,7 +38,7 @@ void ConnectControlCommand::outputSim(int serverValue) {
         address.sin_port = htons(serverValue);
 
         int is_connect = connect(connectSocket, (struct sockaddr *) &address, sizeof(address));
-        cout << "Connected" << endl;
+       // cout << "Connected" << endl;
         if (is_connect == -1) {
             //error
             std::cerr << "Could not connect to host server" << std::endl;
@@ -50,7 +50,7 @@ void ConnectControlCommand::outputSim(int serverValue) {
         bool check = true;
         while (!Command().parserDone()) {
             while (!outputVector.empty()) {
-                cout << outputVector[0] << endl;
+             //   cout << outputVector[0] << endl;
 
                 //mut.lock();
                 //if val is a sender

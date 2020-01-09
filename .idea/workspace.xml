@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
-    <generated />
+    <generated>
+      <config projectName="untitled8" targetName="ex3" />
+    </generated>
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -10,7 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b15ade9c-a047-4fbb-bc2d-25448df67b62" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ConnectControlCommand.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectControlCommand.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Sahar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Sahar.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenServerCommand.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/OpenServerCommand.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ex3.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ex3.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +25,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -32,7 +38,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cmake-build-debug" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cmake-build-debug" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="ex3" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="untitled8" TARGET_NAME="ex3" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="untitled8" RUN_TARGET_NAME="ex3">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -56,11 +74,58 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1578582929406</updated>
-      <workItem from="1578582931481" duration="938000" />
+      <workItem from="1578582931481" duration="1135000" />
+      <workItem from="1578584081512" duration="457000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1578583975542">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1578583975542" />
+    <state width="1807" height="189" key="GridCell.Tab.0.bottom" timestamp="1578584553956">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="189" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1578584553956" />
+    <state width="1807" height="189" key="GridCell.Tab.0.center" timestamp="1578584553955">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="189" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1578584553955" />
+    <state width="1807" height="189" key="GridCell.Tab.0.left" timestamp="1578584553954">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="189" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1578584553954" />
+    <state width="1807" height="189" key="GridCell.Tab.0.right" timestamp="1578584553955">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="189" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1578584553955" />
+    <state width="1807" height="286" key="GridCell.Tab.1.bottom" timestamp="1578584266108">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="286" key="GridCell.Tab.1.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1578584266108" />
+    <state width="1807" height="286" key="GridCell.Tab.1.center" timestamp="1578584266107">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="286" key="GridCell.Tab.1.center/67.27.1853.1053@67.27.1853.1053" timestamp="1578584266107" />
+    <state width="1807" height="286" key="GridCell.Tab.1.left" timestamp="1578584266107">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="286" key="GridCell.Tab.1.left/67.27.1853.1053@67.27.1853.1053" timestamp="1578584266107" />
+    <state width="1807" height="286" key="GridCell.Tab.1.right" timestamp="1578584266108">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="286" key="GridCell.Tab.1.right/67.27.1853.1053@67.27.1853.1053" timestamp="1578584266108" />
+    <state x="649" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1578584084742">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="649" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1578584084742" />
+    <state x="640" y="284" width="707" height="536" key="find.popup" timestamp="1578584248169">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="640" y="284" width="707" height="536" key="find.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1578584248169" />
   </component>
 </project>
