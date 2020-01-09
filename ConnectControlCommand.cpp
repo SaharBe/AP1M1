@@ -26,7 +26,7 @@ mutex mut;
 class TimeoutException;
 
 void ConnectControlCommand::outputSim(int serverValue) {
-        std::cout << "its in outputSim" << std::endl;
+
         int connectSocket = socket(AF_INET, SOCK_STREAM, 0);
         if (connectSocket == -1) {
             //error
@@ -44,7 +44,6 @@ void ConnectControlCommand::outputSim(int serverValue) {
             std::cerr << "Could not connect to host server" << std::endl;
 
         }
-        printf("starting sending\n");
 
         string message1;
         int is_sent = 0;

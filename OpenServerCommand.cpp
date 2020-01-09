@@ -83,7 +83,7 @@ void OpenServerCommand::varFromSim(int client_sockek) {
         for (int k = 0; k < ValuuLIne.size(); ++k) {
             valus[k] = stod(ValuuLIne[k]);
         }
-        
+
         updateMapFromSim(valus, 36);
     }
 
