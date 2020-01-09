@@ -11,7 +11,8 @@ Here are the steps:
 1. Download and install flight-geer : https://www.flightgear.org/download/
 2. Enter to flight-gear setting thr following commands:
 
-  --telnet=socket,in,10,127.0.0.1,5400,tcp --http=8080
+  --telnet=socket,in,10,127.0.0.1,5400,tcp --http=8080    
+  
   --generic=socket,out,10,127.0.0.1,5402,tcp,generic_small
   
 3. Plant the file 'generic_small.xml' in flightgeer/Protocol
