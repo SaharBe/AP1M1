@@ -21,7 +21,6 @@ extern  unordered_map <string, string > mapMatch;
 extern vector<string> outputVector;
 
 
-mutex mut;
 
 class TimeoutException;
 
@@ -49,21 +48,21 @@ void ConnectControlCommand::outputSim(int serverValue) {
         int is_sent = 0;
         bool check = true;
         while (!Command().parserDone()) {
+            dummy::get_mut().lock();
             while (!outputVector.empty()) {
              //   cout << outputVector[0] << endl;
 
-                //mut.lock();
                 //if val is a sender
                 message1 = "set " + outputVector.front();
-                cout << message1 << endl;
+                //cout << message1 << endl;
                 outputVector.erase(outputVector.begin());
                 is_sent = send(connectSocket, message1.c_str(), message1.size(), 0);
                 if (is_sent == -1) {
                     cout << "Could not send" << endl;
                 }
-                //mut.unlock();
                 check = false;
             }
+            dummy::get_mut().unlock();
         }
 
 

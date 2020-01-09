@@ -11,6 +11,10 @@
 
 using namespace std;
 
+
+mutex mut;
+
+
 extern unordered_map<string,Command*> commandMap;
 extern unordered_map<string,varTypes> varMap;
 extern unordered_map<string, double> inputSimMap;
@@ -18,6 +22,9 @@ extern  unordered_map <string, string > mapMatch;
 bool endOfParser;
 vector<string> outputVector;
 
+mutex & dummy::get_mut() {
+    return mut;
+}
 
 int Command::execute(std::vector<string>::iterator ) {}
 
@@ -184,8 +191,9 @@ int VarDefineCommand::execute(std::vector<string>::iterator iterator) {
             }
             if(varMap[varKey].senderOrListener == 0) {
                 string toVectorString = varMap[varKey].sim + " " + to_string(varMap[varKey].value)+ "\r\n";
+                mut.lock();
                 outputVector.push_back(toVectorString);
-
+                mut.unlock();
             }
             return index + 1;
 
@@ -398,7 +406,7 @@ int LoopCommand ::execute(std::vector<string>::iterator iterator) {
 
         }
 
-            cout << "done" << endl;
+          //  cout << "done" << endl;
             return counter;
 }
 
@@ -561,6 +569,7 @@ int CommendUpdateVar::execute(std::vector<string>::iterator iterator) {
     index++;
     if(varMap[var].senderOrListener == 0) {
         string toVectorString = "" + varMap[var].sim + " " + to_string(varMap[var].value) +" \r\n";
+
         outputVector.push_back(toVectorString);
       //  cout << toVectorString << endl;
     }
