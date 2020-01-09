@@ -11,8 +11,8 @@ class OpenServerCommand : public Command {
 public:
     OpenServerCommand(){}
     virtual int execute(std::vector<string>::iterator);
-    void inputSim(int client_sockek);
+    vector<string> split(string str, string sep);
     void varFromSim(int client_sockek);
-    void updateMapFromSim(double array[]);
+   void updateMapFromSim(double array[], int size);
 };
 #endif //UNTITLED8__OPENSERVERCOMMAND_H_

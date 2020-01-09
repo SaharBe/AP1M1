@@ -18,7 +18,7 @@ unordered_map <string, string > mapMatch;
 int main() {
     Command command;
     command.parser();
-
+    command.parserEnd(true);
     std::vector<string> lexerVector;
 
     return 0;

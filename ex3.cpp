@@ -7,6 +7,7 @@
 #include "interpreter.h"
 #include "ConnectControlCommand.h"
 #include "OpenServerCommand.h"
+#include <chrono>
 
 using namespace std;
 
@@ -14,10 +15,15 @@ extern unordered_map<string,Command*> commandMap;
 extern unordered_map<string,varTypes> varMap;
 extern unordered_map<string, double> inputSimMap;
 extern  unordered_map <string, string > mapMatch;
+bool endOfParser;
 vector<string> outputVector;
 
 
 int Command::execute(std::vector<string>::iterator ) {}
+
+Command::Command() {
+    endOfParser = false;
+}
 
 std::vector<string> Command::lexer(char* file) {
     std::vector<string> lexerVector;
@@ -109,7 +115,7 @@ std::vector<string> Command::lexer(char* file) {
 /*sleep by the allotted time*/
 int SleepCommand::execute(std::vector<string>::iterator iterator) {
     iterator+=2;
-   sleep(stod(*iterator));
+    this_thread::sleep_for(chrono::milliseconds(stoi(*iterator)));
     return 5;
 }
 /*print to the consol what we got to print*/
@@ -177,8 +183,9 @@ int VarDefineCommand::execute(std::vector<string>::iterator iterator) {
                 }
             }
             if(varMap[varKey].senderOrListener == 0) {
-                string toVectorString = "" + varMap[varKey].sim + " " + to_string(varMap[varKey].value);
+                string toVectorString = varMap[varKey].sim + " " + to_string(varMap[varKey].value)+ "\r\n";
                 outputVector.push_back(toVectorString);
+                cout << toVectorString << endl;
             }
             return index + 1;
 
@@ -367,10 +374,10 @@ int LoopCommand ::execute(std::vector<string>::iterator iterator) {
                 }
             }
             else {
-                     c = commandMap.at(*iterator);
-                    if(*iterator == "Sleep"){
-                        varMap["alt"].value = 1200;
-                    }
+                    c = commandMap.at(*iterator);
+                 //   if(*iterator == "Sleep"){
+                 //       varMap["alt"].value = 1200;
+                 //   }
 
                     returnValCommand = c->execute(iterator);
                     iterator +=returnValCommand;
@@ -387,7 +394,7 @@ int LoopCommand ::execute(std::vector<string>::iterator iterator) {
 
             }
             ////////////////////////////change !!!
-                 varMap["rpm"].value = 1200;
+             //    varMap["rpm"].value = 1200;
         flag = 1;
         iterator -= (counter-indexOfConditiLine);
 
@@ -550,8 +557,23 @@ int CommendUpdateVar::execute(std::vector<string>::iterator iterator) {
         iterator++;
         index++;
     }//check if spaces work
+    Interpreter* i = new Interpreter();
+
+    bool itisExpression = 0;
+    for(int j = 0; j< exp.length();j++){
+        if(exp[j] == '+' || exp[j] == '-' ||exp[j] == '*' ||exp[j] == '/') {
+            itisExpression = true;
+            break;
+        }
+    }
+    if(itisExpression){
+        Expression* expression =i->interpret(exp);
+        expValue = (expression->calculate());
+    }else{
+        expValue = stod(exp);
+
+    }
     if(index > 3){
-        Interpreter* i = new Interpreter();
         Expression* expression =i->interpret(exp);
         expValue = (expression->calculate());
     }else{
@@ -560,8 +582,9 @@ int CommendUpdateVar::execute(std::vector<string>::iterator iterator) {
     varMap[var].value = expValue;
     index++;
     if(varMap[var].senderOrListener == 0) {
-        string toVectorString = "" + varMap[var].sim + " " + to_string(varMap[var].value);
+        string toVectorString = "" + varMap[var].sim + " " + to_string(varMap[var].value) +" \r\n";
         outputVector.push_back(toVectorString);
+        cout << toVectorString << endl;
     }
     return index;
 
@@ -571,6 +594,7 @@ int CommendUpdateVar::execute(std::vector<string>::iterator iterator) {
 /*The Parser goes over all the values that ​​we got from the Lexer vector,
  * and analyzes their meaning */
 void Command :: parser() {
+    endOfParser = 0;
     char *file = (char *) "fly.txt";
     std::vector<string> stringVector = lexer(file);
     commandMap.insert({"openDataServer", new OpenServerCommand});
@@ -601,5 +625,15 @@ void Command :: parser() {
         }
 
     }
+    endOfParser = 1;
 }
+
+void Command::parserEnd(bool parserFinished) {
+    parserFinished = endOfParser;
+}
+
+bool Command::parserDone() {
+    return endOfParser;
+}
+
 

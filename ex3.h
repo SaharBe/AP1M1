@@ -30,7 +30,9 @@ public:
     void parser ();
     // unordered_map<string,varTypes> varMap;
     virtual  int execute(std::vector<string>::iterator);
-    Command(){};
+    Command();
+    void parserEnd(bool parserFinished);
+    bool parserDone();
 };
 
 

@@ -1,6 +1,5 @@
 #include "ex3.h"
 #include <iostream>
-#include <string.h>
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -11,6 +10,7 @@
 #include "interpreter.h"
 #include <mutex>
 #include "ConnectControlCommand.h"
+#include <exception>
 
 using namespace std;
 
@@ -20,63 +20,56 @@ extern unordered_map<string, double> inputSimMap;
 extern  unordered_map <string, string > mapMatch;
 extern vector<string> outputVector;
 
+
 mutex mut;
 
+class TimeoutException;
+
 void ConnectControlCommand::outputSim(int serverValue) {
-    std:: cout << "its in outputSim" << std::endl;
-    int connectSocket = socket(AF_INET,SOCK_STREAM,0);
-    if (connectSocket == -1) {
-        //error
-        std:: cerr << "Couldn't create a socket" << std::endl;
-    }
-    sockaddr_in address;
-    address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_addr.s_addr = inet_addr("127.0.0.1");
-    address.sin_port = htons(serverValue);
+        std::cout << "its in outputSim" << std::endl;
+        int connectSocket = socket(AF_INET, SOCK_STREAM, 0);
+        if (connectSocket == -1) {
+            //error
+            std::cerr << "Couldn't create a socket" << std::endl;
+        }
+        sockaddr_in address;
+        address.sin_family = AF_INET;
+        address.sin_addr.s_addr = inet_addr("127.0.0.1");
+        address.sin_port = htons(serverValue);
 
-    int is_connect = connect(connectSocket,(struct sockaddr*) &address,sizeof(address));
-    if (is_connect ==-1){
-        //error
-        std:: cerr <<"Could not connect to host server"<<std::endl;
-
-    }
-    printf("starting sending\n");
-    string simString = "";
-
-    string valValue = "0";
-
-    string message1 ;
-    int is_sent =0 ;
-
-
-    while(is_sent != -1) {
-
-        /// //the Crash is here:
-        //   printf("sending\n")'
-        ///
-
-        while (!outputVector.empty()) {
-            cout << outputVector[0] <<endl;
-
-            mut.lock();
-            //if val is a sender
-
-            message1 = "set " + outputVector.back();
-            outputVector.pop_back();
-            is_sent = send(connectSocket, message1.c_str(), message1.size(), 0);
-            mut.unlock();
+        int is_connect = connect(connectSocket, (struct sockaddr *) &address, sizeof(address));
+        cout << "Connected" << endl;
+        if (is_connect == -1) {
+            //error
+            std::cerr << "Could not connect to host server" << std::endl;
 
         }
-        sleep(1);
-    }
+        printf("starting sending\n");
+
+        string message1;
+        int is_sent = 0;
+        bool check = true;
+        while (!Command().parserDone()) {
+            while (!outputVector.empty()) {
+                cout << outputVector[0] << endl;
+
+                //mut.lock();
+                //if val is a sender
+                message1 = "set " + outputVector.front();
+                cout << message1 << endl;
+                outputVector.erase(outputVector.begin());
+                is_sent = send(connectSocket, message1.c_str(), message1.size(), 0);
+                if (is_sent == -1) {
+                    cout << "Could not send" << endl;
+                }
+                //mut.unlock();
+                check = false;
+            }
+        }
 
 
-
-       close(connectSocket);
-
-    }
-
-
+        close(connectSocket);
+}
 
 
 int ConnectControlCommand ::execute(std::vector<string>::iterator iterator) {
@@ -98,7 +91,14 @@ int ConnectControlCommand ::execute(std::vector<string>::iterator iterator) {
     Interpreter* i = new Interpreter();
 
     double expValue = 0;
-    if(index > 3 ){
+    bool itisExpression = 0;
+    for(int j = 0; j< value.length();j++){
+        if(value[j] == '+' || value[j] == '-' ||value[j] == '*' ||value[j] == '/') {
+            itisExpression = true;
+            break;
+        }
+    }
+    if(itisExpression){
         Expression* expression =i->interpret(value);
         expValue = (expression->calculate());
     }else{
@@ -107,8 +107,7 @@ int ConnectControlCommand ::execute(std::vector<string>::iterator iterator) {
     }
 
 
-    std::thread t3(&ConnectControlCommand::outputSim,this,expValue);
-   //t3.join();
+   std::thread t3(&ConnectControlCommand::outputSim,this,(int) expValue);
     t3.detach();
 
     return index + 3;

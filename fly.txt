@@ -22,10 +22,10 @@ var elevator -> sim("/controls/flight/elevator")
 var alt <- sim("/instrumentation/altimeter/indicated-altitude-ft")
 var rpm <- sim("/engines/engine/rpm")
 Print("waiting 2 minutes for gui")
-Sleep(120000)
+Sleep(2)
 Print("let's start")
 warp = 32000
-Sleep(1000)
+Sleep(2)
 magnetos = 3
 throttle = 0.2
 mixture = 0.949
@@ -41,7 +41,7 @@ Print(rpm)
 while rpm <= 750 {
 	Print(rpm)
 }
-Sleep(5000)
+Sleep(2)
 Print("let's fly")
 var h0 = heading
 breaks = 0
@@ -50,6 +50,6 @@ while alt < 1000 {
 	rudder = (h0 - heading)/80
 	aileron = -roll / 70
 	elevator = pitch / 50
-	Sleep(250)
+	Sleep(2)
 }
 Print("done")
